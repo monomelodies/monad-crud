@@ -1,7 +1,7 @@
 {
-  "name": "monad-navgiation",
+  "name": "monad-crud",
   "version": "1.0.0",
-  "description": "Navigation component for Monad CMS",
+  "description": "CRUD component for Monad CMS",
   "main": "es5/index.js",
   "files": [
     "es5/**"
@@ -46,7 +46,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/monomelodies/monad-navigation.git"
+    "url": "https://github.com/monomelodies/monad-crud.git"
   },
   "keywords": [
     "angular",
