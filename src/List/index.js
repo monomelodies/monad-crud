@@ -59,11 +59,15 @@ const table = {
     bindings: {rows: '=', update: '@'}
 };
 
+import Controller from './Controller';
+
 export default angular.module('monad.crud.list', ['monad.cms'])
     .component('monadListHeader', header)
     .component('moListHeader', header)
     .component('monadListTable', table)
     .component('moListTable', table)
+    .controller('monadListCtrl', Controller)
+    .controller('moListController', Controller)
     .name
     ;
 
