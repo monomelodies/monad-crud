@@ -10,7 +10,10 @@ const header = {
         ng-href="#/{{ $root.Language.current }}{{ $ctrl.create }}"></a>
     <span ng-transclude></span>
 </h1>`,
-    bindings: {create: '@'}
+    controller: ['monadLocation', function (monadLocation) {
+        this.url = url => monadLocation.make(url);
+    }],
+    bindings: {create: '<'}
 };
 
 const table = {
@@ -23,8 +26,9 @@ const table = {
         let templates = transcludedElement.find('td');
         if (hdrs.length) {
             angular.forEach(hdrs, hdr => {
-                this.columns.push(angular.element(hdr).attr('property'));
-                this.headers.push(angular.element(hdr).html());
+                const h = angular.element(hdr);
+                this.columns.push(h.attr('property'));
+                this.headers.push(h.html());
             });
         } else {
             if (this.rows && this.rows.length) {
@@ -35,10 +39,10 @@ const table = {
         }
         let rowbody = '';
         this.columns.map(col => {
-            let custom = transcludedElemendElementfind('td[property="' + col + '"]');
+            let custom = transcludedElement.find('td[property="' + col + '"]');
             let html = custom.html();
             if (!(html && html.length)) {
-                html = `<a ng-href="#/{{ $root.Language.current }}{{ $ctrl.update.replace(':id', row.id) }}" arguments="row">{{ row.${col} }}</a>`;
+                html = `<a ng-href="{{ $ctrl.update.replace(':id', row.id) }}" arguments="row">{{ row.${col} }}</a>`;
             }
             $templateCache.put('Monad/' + col + '.html', html);
         });
@@ -54,7 +58,7 @@ const table = {
         </tbody>
     </table>
     <div ng-show="!$ctrl.rows.length" uib-alert class="alert-warning"><span translate>Sorry, nothing found.</span></div>`,
-    bindings: {rows: '=', update: '@'}
+    bindings: {rows: '=', update: '<'}
 };
 
 import Controller from './Controller';
