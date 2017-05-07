@@ -16,7 +16,7 @@ export default class ListController {
      * @param object monadDelete Injected monadDelete service.
      * @return void
      */
-    constructor(monadDelete, $rootScope) {
+    constructor(monadDelete, $rootScope, monadLocation) {
         this.pageSize = this.pageSize || 10;
         this.filter = this.filter || {};
         angular.copy(this.filter, filter);
@@ -27,6 +27,7 @@ export default class ListController {
         };
         this['delete'] = item => monadDelete.ask(item);
         $rootScope.$on('moListSaved', () => this.reset());
+        this.url = url => monadLocation.make(url);
     }
 
     /**
@@ -69,5 +70,5 @@ export default class ListController {
 
 };
 
-ListController.$inject = ['monadDelete', '$rootScope'];
+ListController.$inject = ['monadDelete', '$rootScope', 'monadLocation'];
 
