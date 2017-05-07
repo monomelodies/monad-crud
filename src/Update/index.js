@@ -5,19 +5,17 @@ let gettext = undefined;
 let $q = undefined;
 let moReport = undefined;
 let $route = undefined;
-let $location = undefined;
-let moLanguage = undefined;
+let monadLocation = undefined;
 let moProgress = undefined;
 
 class controller {
 
-    constructor(_gettext_, _$q_, _moReport_, _$route_, _$location_, _moLanguage_, moDelete, _moProgress_) {
+    constructor(_gettext_, _$q_, _moReport_, _$route_, _monadLocation_, moDelete, _moProgress_) {
         gettext = _gettext_;
         $q = _$q_;
         moReport = _moReport_;
         $route = _$route_;
-        $location = _$location_;
-        moLanguage = _moLanguage_;
+        monadLocation = _monadLocation_;
         moProgress = _moProgress_
         this['delete'] = (item, newurl) => {
             moDelete.ask(item, newurl);
@@ -28,7 +26,7 @@ class controller {
             this.data.item = new this.data.item;
         }
         let data = undefined;
-        if (data = $location.search().data) {
+        if (data = monadLocation.search().data) {
             data = angular.fromJson(data);
             for (let prop in data) {
                 if (this.data[prop] != undefined) {
@@ -68,7 +66,7 @@ class controller {
             moProgress.run().then(() => {
                 $route.reset();
                 if (this.creating) {
-                    $location.path(moLanguage.current + this.list);
+                    monadLocation.path(this.list);
                 }
             })
         );
@@ -96,7 +94,7 @@ class controller {
 
 }
 
-controller.$inject = ['gettext', '$q', 'moReport', '$route', '$location', 'moLanguage', 'moDelete', 'moProgress'];
+controller.$inject = ['gettext', '$q', 'moReport', '$route', 'monadLocation', 'moDelete', 'moProgress'];
 
 const Update = {
     templateUrl: 'Monad/Crud/Update/template.html',
