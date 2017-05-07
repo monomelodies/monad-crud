@@ -20,7 +20,7 @@ function local(obj) {
  * In Monad, we want to be able to easily append a new item to an array of
  * queried resources. This exposes a `save` method on the array.
  */
-export default ['$resource', '$rootScope', 'moProgress', ($resource, $rootScope, moProgress) => {
+export default ['$resource', '$rootScope', 'monadProgress', ($resource, $rootScope, monadProgress) => {
     return (url, paramDefaults = {}, actions = {}, options = {}) => {
         let res = $resource(url, paramDefaults, actions, options);
 
@@ -143,13 +143,13 @@ export default ['$resource', '$rootScope', 'moProgress', ($resource, $rootScope,
                         continue;
                     }
                     if (this[i].$deleted()) {
-                        moProgress.schedule(this[i], '$delete');
+                        monadProgress.schedule(this[i], '$delete');
                     } else if (this[i].$dirty()) {
-                        moProgress.schedule(this[i], '$save');
+                        monadProgress.schedule(this[i], '$save');
                     }
                 }
                 if (!nested) {
-                    return moProgress.run();
+                    return monadProgress.run();
                 }
             };
             found.$dirty = function () {
