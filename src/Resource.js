@@ -1,6 +1,8 @@
 
 "use strict";
 
+import 'angular-resource';
+
 const wm = new WeakMap();
 
 function local(obj) {
