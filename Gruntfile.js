@@ -4,23 +4,9 @@ module.exports = function (grunt) {
     var pkg = grunt.file.readJSON('package.json');
     grunt.initConfig({pkg: pkg});
 
-    grunt.loadNpmTasks('grunt-angular-gettext');
-    grunt.config('nggettext_extract', {
-        pot: {
-            files: {
-                'Locale/template.pot': ['src/**/*.{js,html}', 'index.html']
-            }
-        },
-    });
-    grunt.config('nggettext_compile', {
-        all: {
-            files: {'i18n.js': ['Locale/*.po']}
-        }
-    });
-
     grunt.loadNpmTasks('grunt-angular-templates');
     grunt.config('ngtemplates', {
-        'monad.templates': {
+        'monad.crud.templates': {
             options: {
                 htmlmin: {
                     collapseBooleanAttributes: true,
@@ -40,19 +26,6 @@ module.exports = function (grunt) {
             dest: 'es5/templates.js'
         }
     });
-
-    grunt.loadNpmTasks('node-spritesheet');
-    grunt.config('spritesheet', {
-        compile: {
-            options: {
-                outputImage: 'dist/i18n.png',
-                outputCss: 'src/_sass/_flags.scss',
-                selector: '.flag'
-            },
-            files: {'': 'assets/i18n/**/*.png'}
-        }
-    });
-
     /*
     grunt.loadNpmTasks('grunt-sass');
     grunt.config('sass', {
