@@ -68,19 +68,6 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-include-replace');
-    grunt.config('includereplace', {
-        index: {
-            options: {
-                globals: {
-                    version: pkg.version
-                }
-            },
-            src: 'src/index.html',
-            dest: 'dist/index.html'
-        }
-    });
-
     /*
     grunt.loadNpmTasks('grunt-browserify');
     grunt.config('browserify', {
@@ -96,15 +83,8 @@ module.exports = function (grunt) {
     });
     */
 
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.config('copy', {
-        logo: {expand: true, cwd: 'assets', src: 'logo.png', dest: 'dist'},
-        bootstrap: {expand: true, cwd: 'node_modules/bootstrap-sass/assets', src: 'fonts/**', dest: 'dist'},
-        flags: {expand: true, cwd: 'src/_sass', src: 'i18n.png', dest: 'dist'}
-    });
-
     grunt.registerTask('default', ['build']);
-    grunt.registerTask('build', ['ngtemplates', 'gettext', /*'sass',*/ 'includereplace', 'copy'/*, 'browserify'*/]);
+    grunt.registerTask('build', ['ngtemplates'/*, 'sass',*/ /*, 'browserify'*/]);
     grunt.registerTask('gettext', ['nggettext_extract', 'nggettext_compile']);
     grunt.registerTask('dev', ['build', 'watch']);
 };
