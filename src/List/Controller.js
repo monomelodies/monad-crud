@@ -26,7 +26,7 @@ export default class ListController {
             }
         };
         this['delete'] = item => monadDelete.ask(item);
-        $rootScope.$on('moListSaved', () => this.reset());
+        $rootScope.$on('monadListSaved', () => this.reset());
         this.url = url => monadLocation.make(url);
     }
 
