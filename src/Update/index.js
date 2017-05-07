@@ -3,42 +3,44 @@
 
 let gettext = undefined;
 let $q = undefined;
-let moReport = undefined;
+let monadReport = undefined;
 let $route = undefined;
 let monadLocation = undefined;
-let moProgress = undefined;
+let monadProgress = undefined;
 
 class controller {
 
-    constructor(_gettext_, _$q_, _moReport_, _$route_, _monadLocation_, moDelete, _moProgress_) {
+    constructor(_gettext_, _$q_, _monadReport_, _$route_, _monadLocation_, monadDelete, _monadProgress_) {
         gettext = _gettext_;
         $q = _$q_;
-        moReport = _moReport_;
+        monadReport = _monadReport_;
         $route = _$route_;
         monadLocation = _monadLocation_;
-        moProgress = _moProgress_
+        monadProgress = _monadProgress_
         this['delete'] = (item, newurl) => {
-            moDelete.ask(item, newurl);
+            monadDelete.ask(item, newurl);
         };
         this.creating = false;
-        if (typeof this.data.item == 'function') {
-            this.creating = true;
-            this.data.item = new this.data.item;
-        }
-        let data = undefined;
-        if (data = monadLocation.search().data) {
-            data = angular.fromJson(data);
-            for (let prop in data) {
-                if (this.data[prop] != undefined) {
-                    for (let sub in data[prop]) {
-                        if (this.data[prop][sub] == undefined) {
-                            this.data[prop][sub] = data[prop][sub];
+        this.$onInit = () => {
+            if (typeof this.data.item == 'function') {
+                this.creating = true;
+                this.data.item = new this.data.item;
+            }
+            let data = undefined;
+            if (data = monadLocation.search().data) {
+                data = angular.fromJson(data);
+                for (let prop in data) {
+                    if (this.data[prop] != undefined) {
+                        for (let sub in data[prop]) {
+                            if (this.data[prop][sub] == undefined) {
+                                this.data[prop][sub] = data[prop][sub];
+                            }
                         }
+                        this.data[prop].$markClean();
                     }
-                    this.data[prop].$markClean();
                 }
             }
-        }
+        };
     }
 
     save() {
@@ -49,21 +51,21 @@ class controller {
                 return;
             }
             if (item.$deleted && item.$deleted()) {
-                moProgress.schedule(item, '$delete');
+                monadProgress.schedule(item, '$delete');
             } else if (item.$dirty && item.$dirty()) {
-                moProgress.schedule(item, '$save');
+                monadProgress.schedule(item, '$save');
             }
         };
 
         for (let i in this.data) {
             $save(this.data[i]);
         }
-        moReport.add(
+        monadReport.add(
             'info',
             '<p style="text-align: center" translate>' + gettext('Saving...') + '</p>' +
             '<uib-progressbar type="info" class="progress-striped" value="msg.data.progress"></uib-progressbar>',
             this,
-            moProgress.run().then(() => {
+            monadProgress.run().then(() => {
                 $route.reset();
                 if (this.creating) {
                     monadLocation.path(this.list);
@@ -94,7 +96,7 @@ class controller {
 
 }
 
-controller.$inject = ['gettext', '$q', 'moReport', '$route', 'monadLocation', 'moDelete', 'moProgress'];
+controller.$inject = ['gettext', '$q', 'monadReport', '$route', 'monadLocation', 'monadDelete', 'monadProgress'];
 
 const Update = {
     templateUrl: 'Monad/Crud/Update/template.html',
