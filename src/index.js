@@ -3,7 +3,7 @@
 
 import List from './List';
 import Update from './Update';
-import '../es5/templates';
+import '../lib/templates';
 import Resource from './Resource';
 import Field from './Field';
 import Delete from './Delete';
