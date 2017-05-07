@@ -3,9 +3,6 @@
 
 const header = {
     transclude: true,
-    controller: ['$transclude', function ($transclude) {
-        this.transcluded = !!$transclude().length;
-    }],
     template: `<h1 class="clearfix">
     <a ng-if="$ctrl.create"
         class="glyphicon glyphicon-plus-sign pull-right"
@@ -18,11 +15,12 @@ const header = {
 
 const table = {
     transclude: true,
-    controller: ['$transclude', '$templateCache', function ($transclude, $templateCache) {
+    controller: ['$transclude', '$element', '$templateCache', function ($transclude, $element, $templateCache) {
         this.columns = [];
         this.headers = [];
-        let hdrs = $transclude().find('th');
-        let templates = $transclude().find('td');
+        let transcludedElement = $transclude();
+        let hdrs = transcludedElement.find('th');
+        let templates = transcludedElement.find('td');
         if (hdrs.length) {
             angular.forEach(hdrs, hdr => {
                 this.columns.push(angular.element(hdr).attr('property'));
@@ -37,12 +35,12 @@ const table = {
         }
         let rowbody = '';
         this.columns.map(col => {
-            let custom = $transclude().find('td[property="' + col + '"]');
+            let custom = transcludedElemendElementfind('td[property="' + col + '"]');
             let html = custom.html();
             if (!(html && html.length)) {
                 html = `<a ng-href="#/{{ $root.Language.current }}{{ $ctrl.update.replace(':id', row.id) }}" arguments="row">{{ row.${col} }}</a>`;
             }
-            $templateCache.put('/monad/' + col + '.html', html);
+            $templateCache.put('Monad/' + col + '.html', html);
         });
     }],
     template: `<table class="table table-striped" ng-show="$ctrl.rows.length">
@@ -51,7 +49,7 @@ const table = {
         </tr></thead>
         <tbody>
             <tr ng-repeat="row in $ctrl.rows" ng-if="!row.$deleted()">
-                <td ng-repeat="column in $ctrl.columns" ng-include="'/monad/' + column + '.html'"></td>
+                <td ng-repeat="column in $ctrl.columns" ng-include="'Monad/' + column + '.html'"></td>
             </tr>
         </tbody>
     </table>
