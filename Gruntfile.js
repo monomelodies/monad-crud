@@ -27,11 +27,11 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-sass');
+    grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.config('sass', {
         monad: {
             options: {
-                outputStyle: 'compressed',
+                style: 'compressed',
                 compass: true,
                 sourcemap: 'none'
             },
