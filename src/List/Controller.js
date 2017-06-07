@@ -22,6 +22,7 @@ export default class ListController {
         angular.copy(this.filter, filter);
         this.$onInit = () => {
             if (!this.items) {
+                this.applyFilter();
                 this.page = _page;
             }
         };
