@@ -27,18 +27,6 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-sass');
-    grunt.config('sass', {
-        monad: {
-            options: {
-                style: 'compressed',
-                compass: true,
-                sourcemap: 'none'
-            },
-            files: {'dist/monad-crud.css': 'src/style.scss'}
-        }
-    });
-
     grunt.loadNpmTasks('grunt-browserify');
     grunt.config('browserify', {
         monad: {
@@ -72,10 +60,6 @@ module.exports = function (grunt) {
             files: ['src/**/*.js'],
             tasks: ['shell:lib']
         },
-        sass: {
-            files: ['src/style.scss'],
-            tasks: ['sass']
-        },
         templates: {
             files: ['src/**/*.html'],
             tasks: ['ngtemplates']
@@ -83,7 +67,7 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('default', ['build']);
-    grunt.registerTask('build', ['sass', 'shell:lib', 'ngtemplates', 'browserify']);
+    grunt.registerTask('build', ['shell:lib', 'ngtemplates', 'browserify']);
     grunt.registerTask('dev', ['build', 'watch']);
     grunt.registerTask('prod', ['shell:clean', 'build', 'uglify']);
 };
