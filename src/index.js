@@ -1,6 +1,7 @@
 
 "use strict";
 
+import 'angular-resource';
 import List from './List';
 import Update from './Update';
 import '../lib/templates';
