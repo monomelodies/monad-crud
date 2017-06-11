@@ -7,7 +7,7 @@ const header = {
     <a ng-if="$ctrl.create"
         class="glyphicon glyphicon-plus-sign pull-right"
         title="{{ 'Create' | translate }}"
-        ng-href="#/{{ $root.Language.current }}{{ $ctrl.create }}"></a>
+        ng-href="{{ $ctrl.create }}"></a>
     <span ng-transclude></span>
 </h1>`,
     controller: ['monadLocation', function (monadLocation) {
