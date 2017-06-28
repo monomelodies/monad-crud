@@ -19,6 +19,17 @@ const header = {
 const table = {
     transclude: true,
     controller: ['$transclude', '$element', '$templateCache', function ($transclude, $element, $templateCache) {
+
+        this.resolve = (row, col) => {
+            let parts = col.split('.');
+            let found = angular.copy(row);
+            while (parts.length) {
+                const prop = parts.shift();
+                found = found[prop];
+            }
+            return found;
+        };
+
         this.columns = [];
         this.headers = [];
         let transcludedElement = $transclude();
@@ -42,7 +53,7 @@ const table = {
             let custom = transcludedElement.find('td[property="' + col + '"]');
             let html = custom.html();
             if (!(html && html.length)) {
-                html = `<a ng-href="{{ $ctrl.update.replace(':id', row.id) }}" arguments="row">{{ row.${col} }}</a>`;
+                html = `<a ng-href="{{ $ctrl.update.replace(':id', row.id) }}" arguments="row">{{ $ctrl.resolve(row, '${col}') }}</a>`;
             }
             $templateCache.put('Monad/' + col + '.html', html);
         });
