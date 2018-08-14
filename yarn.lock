@@ -3238,9 +3238,9 @@ module-deps@^6.0.0:
     through2 "^2.0.0"
     xtend "^4.0.0"
 
-monad-cms@^3.1.3:
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/monad-cms/-/monad-cms-3.1.3.tgz#ba9c236b3e4cbb826799f2fd9d97085fd8023f17"
+monad-cms@^3.1.4:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/monad-cms/-/monad-cms-3.1.4.tgz#3cb93c43d1b3d58d4a881f7e849766385cd91f80"
   dependencies:
     angular "^1.7.3"
     angular-animate "^1.7.3"
