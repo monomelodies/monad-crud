@@ -5,8 +5,11 @@ export default (obj, property) => {
     let parts = property.split('.');
     let found = angular.copy(obj);
     while (parts.length) {
-        const prop = parts.shift();
-        found = found[prop];
+        try {
+            found = found[parts.shift()];
+        } catch (e) {
+            return '$title';
+        }
     }
     return found;
 };
