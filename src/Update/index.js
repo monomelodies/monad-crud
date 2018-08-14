@@ -1,6 +1,8 @@
 
 "use strict";
 
+import ResolveProperty from '../ResolveProperty';
+
 let gettext = undefined;
 let $q = undefined;
 let monadReport = undefined;
@@ -10,8 +12,8 @@ let monadProgress = undefined;
 
 class controller {
 
-    constructor(_gettext_, _$q_, _monadReport_, _$route_, _monadLocation_, monadDelete, _monadProgress_, monadResolveProperty) {
-        this.resolve = monadResolveProperty;
+    constructor(_gettext_, _$q_, _monadReport_, _$route_, _monadLocation_, monadDelete, _monadProgress_) {
+        this.resolve = ResolveProperty;
         gettext = _gettext_;
         $q = _$q_;
         monadReport = _monadReport_;
@@ -97,7 +99,7 @@ class controller {
 
 }
 
-controller.$inject = ['gettext', '$q', 'monadReport', '$route', 'monadLocation', 'monadDelete', 'monadProgress', 'monadResolveProperty'];
+controller.$inject = ['gettext', '$q', 'monadReport', '$route', 'monadLocation', 'monadDelete', 'monadProgress'];
 
 const Update = {
     templateUrl: 'Monad/Crud/Update/template.html',
