@@ -10,7 +10,8 @@ let monadProgress = undefined;
 
 class controller {
 
-    constructor(_gettext_, _$q_, _monadReport_, _$route_, _monadLocation_, monadDelete, _monadProgress_) {
+    constructor(_gettext_, _$q_, _monadReport_, _$route_, _monadLocation_, monadDelete, _monadProgress_, monadResolve) {
+        this.reolve = monadResolve;
         gettext = _gettext_;
         $q = _$q_;
         monadReport = _monadReport_;
@@ -96,7 +97,7 @@ class controller {
 
 }
 
-controller.$inject = ['gettext', '$q', 'monadReport', '$route', 'monadLocation', 'monadDelete', 'monadProgress'];
+controller.$inject = ['gettext', '$q', 'monadReport', '$route', 'monadLocation', 'monadDelete', 'monadProgress', 'monadResolve'];
 
 const Update = {
     templateUrl: 'Monad/Crud/Update/template.html',
