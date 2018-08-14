@@ -18,18 +18,8 @@ const header = {
 
 const table = {
     transclude: true,
-    controller: ['$transclude', '$element', '$templateCache', function ($transclude, $element, $templateCache) {
-
-        this.resolve = (row, col) => {
-            let parts = col.split('.');
-            let found = angular.copy(row);
-            while (parts.length) {
-                const prop = parts.shift();
-                found = found[prop];
-            }
-            return found;
-        };
-
+    controller: ['$transclude', '$element', '$templateCache', 'monadResolve', function ($transclude, $element, $templateCache, resolve) {
+        this.resolve = resolve;
         this.columns = [];
         this.headers = [];
         let transcludedElement = $transclude();
