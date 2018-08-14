@@ -1,6 +1,7 @@
 
 "use strict";
 
+import ResolveProperty from '../ResolveProperty';
 const header = {
     transclude: true,
     template: `<h1 class="clearfix">
@@ -18,8 +19,8 @@ const header = {
 
 const table = {
     transclude: true,
-    controller: ['$transclude', '$element', '$templateCache', 'monadResolveProperty', function ($transclude, $element, $templateCache, resolve) {
-        this.resolve = resolve;
+    controller: ['$transclude', '$element', '$templateCache', function ($transclude, $element, $templateCache) {
+        this.resolve = ResolveProperty;
         this.columns = [];
         this.headers = [];
         let transcludedElement = $transclude();
