@@ -18,7 +18,7 @@ const header = {
 
 const table = {
     transclude: true,
-    controller: ['$transclude', '$element', '$templateCache', 'monadResolve', function ($transclude, $element, $templateCache, resolve) {
+    controller: ['$transclude', '$element', '$templateCache', 'monadResolveProperty', function ($transclude, $element, $templateCache, resolve) {
         this.resolve = resolve;
         this.columns = [];
         this.headers = [];
