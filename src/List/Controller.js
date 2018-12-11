@@ -19,7 +19,7 @@ export default class ListController {
     constructor(monadDelete, $rootScope, monadLocation) {
         this.pageSize = this.pageSize || 10;
         this.filter = this.filter || {};
-        this.order = this.order || {'id DESC'};
+        this.order = this.order || 'id DESC';
         angular.copy(this.filter, filter);
         this.$onInit = () => {
             if (!this.items) {
