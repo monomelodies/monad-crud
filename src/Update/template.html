@@ -1,7 +1,9 @@
 <h1 class="container-fluid clearfix">
     <small><a class="glyphicon glyphicon-arrow-up pull-right" ng-href="{{ $ctrl.list }}"></a></small>
     <span ng-if="!$ctrl.data.item.id" translate>Create new item in <code>{{ $ctrl.type }}</code></span>
-    <span ng-if="$ctrl.data.item.id"  translate>Edit <q>{{ $ctrl.resolve($ctrl.data.item, $ctrl.title ? $ctrl.title : '$title') }}</q> in <code>{{ $ctrl.type }}</code></span>
+    <span ng-if="$ctrl.data.item.id"  translate>
+        Edit <q>{{ $ctrl.resolve($ctrl.data.item, $ctrl.titleProperty ? $ctrl.titleProperty : '$title') }}</q> in <code>{{ $ctrl.type }}</code>
+    </span>
 </h1>
 <div class="container-fluid clearfix">
     <form ng-submit="$ctrl.save()" id="mo_update_form" name="mo_update_form" novalidate method="post">
