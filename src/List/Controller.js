@@ -19,6 +19,7 @@ export default class ListController {
     constructor(monadDelete, $rootScope, monadLocation) {
         this.pageSize = this.pageSize || 10;
         this.filter = this.filter || {};
+        this.order = this.order || 'id DESC';
         angular.copy(this.filter, filter);
         this.$onInit = () => {
             if (!this.items) {
@@ -57,7 +58,7 @@ export default class ListController {
      */
     set page(page) {
         _page = page;
-        this.items = this.resource.query({filter, limit: this.pageSize, offset: (page - 1) * this.pageSize});
+        this.items = this.resource.query({filter, limit: this.pageSize, offset: (page - 1) * this.pageSize, order: this.order});
     }
 
     applyFilter() {
