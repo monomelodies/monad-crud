@@ -24,26 +24,28 @@ class controller {
             monadDelete.ask(item, newurl);
         };
         this.creating = false;
-        this.$onInit = () => {
-            if (typeof this.data.item == 'function') {
-                this.creating = true;
-                this.data.item = new this.data.item;
-            }
-            let data = undefined;
-            if (data = monadLocation.search().data) {
-                data = angular.fromJson(data);
-                for (let prop in data) {
-                    if (this.data[prop] != undefined) {
-                        for (let sub in data[prop]) {
-                            if (this.data[prop][sub] == undefined) {
-                                this.data[prop][sub] = data[prop][sub];
-                            }
+    }
+
+    ['$onInit']() {
+        if (typeof this.data.item == 'function') {
+            this.creating = true;
+            this.data.item = new this.data.item;
+        }
+        let data = undefined;
+        if (data = monadLocation.search().data) {
+            data = angular.fromJson(data);
+            for (let prop in data) {
+                if (this.data[prop] != undefined) {
+                    for (let sub in data[prop]) {
+                        if (this.data[prop][sub] == undefined) {
+                            this.data[prop][sub] = data[prop][sub];
                         }
-                        this.data[prop].$markClean();
                     }
+                    this.data[prop].$markClean();
                 }
             }
-        };
+        }
+        this.titleProperty = this.titleProperty || this.title;
     }
 
     save() {
@@ -104,7 +106,7 @@ controller.$inject = ['gettext', '$q', 'monadReport', '$route', 'monadLocation',
 const Update = {
     templateUrl: 'Monad/Crud/Update/template.html',
     transclude: true,
-    bindings: {data: '=', list: '@', type: '@', title: '@'},
+    bindings: {data: '=', list: '@', type: '@', titleProperty: '@'},
     controller
 };
 
