@@ -1,5 +1,5 @@
 <h1 class="container-fluid clearfix">
-    <small><a class="fa fa-level-up-alt float-right" ng-href="{{ $ctrl.list }}"></a></small>
+    <small><a class="fa fa-level-up float-right" ng-href="{{ $ctrl.list }}"></a></small>
     <span ng-if="!$ctrl.data.item.id" translate>Create new item in <code>{{ $ctrl.type }}</code></span>
     <span ng-if="$ctrl.data.item.id"  translate>
         Edit <q>{{ $ctrl.titleProperty ? $ctrl.resolve($ctrl.data.item, $ctrl.titleProperty) : $ctrl.data.item.$title() }}</q> in <code>{{ $ctrl.type }}</code>
