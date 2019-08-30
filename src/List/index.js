@@ -6,7 +6,7 @@ const header = {
     transclude: true,
     template: `<h1 class="clearfix">
     <a ng-if="$ctrl.create"
-        class="glyphicon glyphicon-plus-sign pull-right"
+        class="fa fa-plus-circle float-right"
         title="{{ 'Create' | translate }}"
         ng-href="{{ $ctrl.create }}"></a>
     <span ng-transclude></span>
