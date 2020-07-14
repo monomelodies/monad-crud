@@ -44,8 +44,9 @@ const table = {
             let custom = transcludedElement.find('td[property="' + col + '"]');
             let html = custom.html();
             if (!(html && html.length)) {
-                html = `<a ng-href="{{ $ctrl.update.replace(':id', row.id) }}" arguments="row">{{ $ctrl.resolve(row, '${col}') }}</a>`;
+                html = `{{ $ctrl.resolve(row, '${col}') }}`;
             }
+            html = `<a ng-href="{{ $ctrl.update.replace(':id', row.id) }}" arguments="row">${html}</a>`;
             $templateCache.put('Monad/' + col + '.html', html);
         });
     }],
