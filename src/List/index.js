@@ -2,6 +2,7 @@
 "use strict";
 
 import ResolveProperty from '../ResolveProperty';
+
 const header = {
     transclude: true,
     template: `<h1 class="clearfix">
@@ -23,9 +24,8 @@ const table = {
         this.resolve = ResolveProperty;
         this.columns = [];
         this.headers = [];
-        let transcludedElement = $transclude();
-        let hdrs = transcludedElement.find('th');
-        let templates = transcludedElement.find('td');
+        const transcludedElement = $transclude();
+        const hdrs = transcludedElement.find('th');
         if (hdrs.length) {
             angular.forEach(hdrs, hdr => {
                 const h = angular.element(hdr);
@@ -39,15 +39,19 @@ const table = {
                 }
             }
         }
-        let rowbody = '';
+        const customs = transcludedElement.find('td');
         this.columns.map(col => {
-            let custom = transcludedElement.find('td[property="' + col + '"]');
-            let html = custom.html();
-            if (!(html && html.length)) {
+            let html = '';
+            angular.forEach(customs, custom => {
+                if (custom.attributes.property.nodeValue == col) {
+                    html = custom.innerHTML;
+                }
+            });
+            if (!html.length) {
                 html = `{{ $ctrl.resolve(row, '${col}') }}`;
             }
             html = `<a ng-href="{{ $ctrl.update.replace(':id', row.id) }}" arguments="row">${html}</a>`;
-            $templateCache.put('Monad/' + col + '.html', html);
+            $templateCache.put(`Monad/${col}.html`, html);
         });
     }],
     template: `<table class="table table-striped" ng-show="$ctrl.rows.length">
