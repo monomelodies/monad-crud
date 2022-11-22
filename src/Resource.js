@@ -96,7 +96,7 @@ export default ['$resource', '$rootScope', 'monadProgress', ($resource, $rootSco
                 if (prop.substring(0, 1) == '$') {
                     continue;
                 }
-                if (typeof this[prop] == 'string' && this[prop].length && res[prop].length <= 255) {
+                if (typeof this[prop] == 'string' && this[prop].length && this[prop].length <= 255) {
                     return this[prop];
                 }
             }
