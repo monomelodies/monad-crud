@@ -106,7 +106,7 @@ controller.$inject = ['gettext', '$q', 'monadReport', '$route', 'monadLocation',
 const Update = {
     templateUrl: 'Monad/Crud/Update/template.html',
     transclude: true,
-    bindings: {data: '=', list: '@', type: '@', titleProperty: '@'},
+    bindings: {data: '=', list: '<', type: '@', titleProperty: '@'},
     controller
 };
 
