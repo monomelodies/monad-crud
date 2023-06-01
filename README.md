@@ -46,8 +46,7 @@ angular.module('my-admin', [])
     })
     .component('fooDetail', {
         template: schema,
-        bindings: {data: '<'},
-        controller
+        bindings: {data: '<'}
     });
 ```
 
