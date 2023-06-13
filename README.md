@@ -64,10 +64,11 @@ The HTML for the list will typically look something like this:
             These should specify the fields you want shown in the list
             (typically, not everything is relevant for an overview).
             The `property` attribute specifies the property on the JSON
-            objects in the list.
+            objects in the list. `row` is the placeholder for the current
+            item in the list.
             -->
-            <th property="id">ID</th>
-            <th property="subject">Subject</th>
+            <th property="row.id">ID</th>
+            <th property="row.subject">Subject</th>
         </tr></table>
     </monad-list-table>
     <div class="text-center" ng-if="$ctrl.count > 10">
