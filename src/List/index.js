@@ -1,8 +1,6 @@
 
 "use strict";
 
-import ResolveProperty from '../ResolveProperty';
-
 const header = {
     transclude: true,
     template: `<h1 class="clearfix">
@@ -21,7 +19,6 @@ const header = {
 const table = {
     transclude: true,
     controller: ['$transclude', '$element', '$templateCache', function ($transclude, $element, $templateCache) {
-        this.resolve = ResolveProperty;
         this.columns = [];
         this.headers = [];
         const transcludedElement = $transclude();
@@ -48,7 +45,7 @@ const table = {
                 }
             });
             if (!html.length) {
-                html = `{{ $ctrl.resolve(row, '${col}') }}`;
+                html = `{{ ${col} }}`;
             }
             html = `<a ng-href="{{ $ctrl.update.replace(':id', row.id) }}" arguments="row">${html}</a>`;
             $templateCache.put(`Monad/${col}.html`, html);
